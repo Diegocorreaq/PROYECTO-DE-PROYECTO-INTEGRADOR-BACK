@@ -1,0 +1,112 @@
+package com.empresa.controller;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.empresa.entity.Visitante;
+import com.empresa.service.VisitanteService;
+
+
+
+
+@RestController
+@RequestMapping("/rest/visitante")
+public class VisitanteController {
+
+	@Autowired
+	private VisitanteService service;
+	
+	
+	@GetMapping
+	@ResponseBody
+	public ResponseEntity<List<Visitante>> listaTodos(){
+		return ResponseEntity.ok(service.listaTodos());
+	}
+	
+	@GetMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<List<Visitante>> listarPorID(@PathVariable(name = "id") int id){
+		return ResponseEntity.ok(service.listaPorId(id));
+	}
+	
+	@PostMapping
+	@ResponseBody
+	public ResponseEntity<HashMap<String, Object>> insertarVisitante(@RequestBody Visitante obj){
+		HashMap<String, Object> salida = new HashMap<String, Object>();
+		try {
+			List<Visitante> lista = service.listaPorId(obj.getIdVisitante());
+			if (CollectionUtils.isEmpty(lista)) {
+				obj.setIdVisitante(0);
+				Visitante objSalida = service.insertaActualizaVisitante(obj);
+				if (objSalida == null) {
+					salida.put("mensaje", "Error al registrar");					
+				}else {
+					salida.put("mensaje", "Registro exitoso");
+				}		
+			}else {
+				salida.put("mensaje", "El Id ya existe: "+obj.getIdVisitante());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Error al registrar "+e.getMessage() );
+		}
+		return ResponseEntity.ok(salida);
+	}
+	@PutMapping
+	@ResponseBody
+	public ResponseEntity<HashMap<String, Object>> actualizarVisitante(@RequestBody Visitante obj){
+		HashMap<String, Object> salida = new HashMap<String, Object>();
+		try {
+			List<Visitante> lista = service.listaPorId(obj.getIdVisitante());
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "El Id no existe: "+obj.getIdVisitante());
+			}else {
+				Visitante objSalida = service.insertaActualizaVisitante(obj);
+				if (objSalida == null) {
+					salida.put("mensaje", "Error al actualizar");					
+				}else {
+					salida.put("mensaje", "Actualización exitosa");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Error al actualizar "+e.getMessage() );
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public ResponseEntity<HashMap<String, Object>> eliminarVisitante(@PathVariable(name = "id") int id){
+		HashMap<String, Object> salida = new HashMap<String, Object>();
+		try {
+			List<Visitante> lista = service.listaPorId(id);
+			if (CollectionUtils.isEmpty(lista)) {				
+				salida.put("mensaje", "El Id no existe: "+id);
+			}else {				
+				service.eliminaPorId(id);
+				salida.put("mensaje", "Eliminación exitosa");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Error al eliminar "+e.getMessage() );
+		}
+		return ResponseEntity.ok(salida);
+	}
+}
+
+
+
