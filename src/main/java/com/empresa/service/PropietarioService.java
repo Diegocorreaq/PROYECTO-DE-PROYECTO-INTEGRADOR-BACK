@@ -2,13 +2,13 @@ package com.empresa.service;
 
 import java.util.List;
 
-import com.empresa.entity.Propietario;
+import com.empresa.entity.Habitante;
 
 public interface PropietarioService {
 	
-	public abstract List<Propietario> listaTodos();
-	public abstract List<Propietario> listaPorId(int id);
-	public abstract Propietario insertaActualizaPropietario(Propietario obj);
+	public abstract List<Habitante> listaTodos();
+	public abstract List<Habitante> listaPorId(int id);
+	public abstract Habitante insertaActualizaPropietario(Habitante obj);
 	public abstract void eliminaPorId(int id);
 	
 }

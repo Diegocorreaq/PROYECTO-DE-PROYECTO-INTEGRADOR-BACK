@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.empresa.entity.Propietario;
+import com.empresa.entity.Habitante;
 
 
-public interface PropietarioRepository extends JpaRepository<Propietario, Integer>{
+public interface PropietarioRepository extends JpaRepository<Habitante, Integer>{
 	
-	public List<Propietario> findByIdPropietario(int id);
+	public List<Habitante> findByIdPropietario(int id);
 	
 }

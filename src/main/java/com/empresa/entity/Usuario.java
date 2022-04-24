@@ -18,26 +18,25 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "habitante")
-public class Habitante {
+@Table(name = "usuario")
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idhabitante")
-	private int idHabitante;
-	@Column(name = "coddepartamento")
-	private int codDepartamento;
-	
-	private String dni;
-	private String nombre;	
+	@Column(name = "idusuario")
+	private int idUsuario;
+	private String password;
+	@Column(name = "idtipousuario")
+	private int idTipoUsuario;
+	private int dni;
+	private String nombre;
 	private String apellido;
 	private String correo;
 	private String telefono;
 	private Date fechaNacimiento;
-	@Column(name = "idtipopropietario")
-	private int idTipoPropietario;	
-	@Column(name = "idusuario")
-	private int idUsuario;
 	private Date fechaRegistro;
 	
+	
 }
+
+

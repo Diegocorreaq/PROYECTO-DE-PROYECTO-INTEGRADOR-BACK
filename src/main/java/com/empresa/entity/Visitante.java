@@ -25,7 +25,6 @@ public class Visitante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idvisitante")
 	private int idVisitante;
-	
 	@Column(name = "coddepartamento")
 	private int codDepartamento;
 	private String nombre;
@@ -33,6 +32,8 @@ public class Visitante {
 	private String telefono;
 	private String parentesco;
 	private Date fechaNacimiento;
+	@Column(name = "idusuario")
+	private int idUsuario;
 	private Date fechaRegistro;
 	
 	
