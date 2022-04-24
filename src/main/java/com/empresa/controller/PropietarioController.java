@@ -46,9 +46,9 @@ public class PropietarioController {
 	public ResponseEntity<HashMap<String, Object>> insertarPropietario(@RequestBody Habitante obj){
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Habitante> lista = service.listaPorId(obj.getIdPropietario());
+			List<Habitante> lista = service.listaPorId(obj.getIdHabitante());
 			if (CollectionUtils.isEmpty(lista)) {
-				obj.setIdPropietario(0);
+				obj.setIdHabitante(0);
 				Habitante objSalida = service.insertaActualizaPropietario(obj);
 				if (objSalida == null) {
 					salida.put("mensaje", "Error al registrar");					
@@ -56,7 +56,7 @@ public class PropietarioController {
 					salida.put("mensaje", "Registro exitoso");
 				}		
 			}else {
-				salida.put("mensaje", "El Id ya existe: "+obj.getIdPropietario());
+				salida.put("mensaje", "El Id ya existe: "+obj.getIdHabitante());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,9 +69,9 @@ public class PropietarioController {
 	public ResponseEntity<HashMap<String, Object>> actualizarPropietario(@RequestBody Habitante obj){
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Habitante> lista = service.listaPorId(obj.getIdPropietario());
+			List<Habitante> lista = service.listaPorId(obj.getIdHabitante());
 			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "El Id no existe: "+obj.getIdPropietario());
+				salida.put("mensaje", "El Id no existe: "+obj.getIdHabitante());
 			}else {
 				Habitante objSalida = service.insertaActualizaPropietario(obj);
 				if (objSalida == null) {
