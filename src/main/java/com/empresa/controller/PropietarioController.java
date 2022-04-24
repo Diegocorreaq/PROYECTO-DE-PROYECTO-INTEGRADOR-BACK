@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.empresa.entity.Propietario;
+import com.empresa.entity.Habitante;
 import com.empresa.service.PropietarioService;
 
 
@@ -31,25 +31,25 @@ public class PropietarioController {
 	
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Propietario>> listaTodos(){
+	public ResponseEntity<List<Habitante>> listaTodos(){
 		return ResponseEntity.ok(service.listaTodos());
 	}
 	
 	@GetMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<List<Propietario>> listarPorID(@PathVariable(name = "id") int id){
+	public ResponseEntity<List<Habitante>> listarPorID(@PathVariable(name = "id") int id){
 		return ResponseEntity.ok(service.listaPorId(id));
 	}
 	
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> insertarPropietario(@RequestBody Propietario obj){
+	public ResponseEntity<HashMap<String, Object>> insertarPropietario(@RequestBody Habitante obj){
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Propietario> lista = service.listaPorId(obj.getIdPropietario());
+			List<Habitante> lista = service.listaPorId(obj.getIdPropietario());
 			if (CollectionUtils.isEmpty(lista)) {
 				obj.setIdPropietario(0);
-				Propietario objSalida = service.insertaActualizaPropietario(obj);
+				Habitante objSalida = service.insertaActualizaPropietario(obj);
 				if (objSalida == null) {
 					salida.put("mensaje", "Error al registrar");					
 				}else {
@@ -66,14 +66,14 @@ public class PropietarioController {
 	}
 	@PutMapping
 	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> actualizarPropietario(@RequestBody Propietario obj){
+	public ResponseEntity<HashMap<String, Object>> actualizarPropietario(@RequestBody Habitante obj){
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Propietario> lista = service.listaPorId(obj.getIdPropietario());
+			List<Habitante> lista = service.listaPorId(obj.getIdPropietario());
 			if (CollectionUtils.isEmpty(lista)) {
 				salida.put("mensaje", "El Id no existe: "+obj.getIdPropietario());
 			}else {
-				Propietario objSalida = service.insertaActualizaPropietario(obj);
+				Habitante objSalida = service.insertaActualizaPropietario(obj);
 				if (objSalida == null) {
 					salida.put("mensaje", "Error al actualizar");					
 				}else {
@@ -92,7 +92,7 @@ public class PropietarioController {
 	public ResponseEntity<HashMap<String, Object>> eliminarPropietario(@PathVariable(name = "id") int id){
 		HashMap<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Propietario> lista = service.listaPorId(id);
+			List<Habitante> lista = service.listaPorId(id);
 			if (CollectionUtils.isEmpty(lista)) {				
 				salida.put("mensaje", "El Id no existe: "+id);
 			}else {				

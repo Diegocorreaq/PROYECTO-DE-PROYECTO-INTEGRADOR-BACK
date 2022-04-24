@@ -25,11 +25,11 @@ public class Departamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "coddepartamento")
 	private int codDepartamento;
-	@Column(name = "codedificio")
-	private int codEdificio;
+	private String descripcion;
 	private int numHabitaciones;
 	private Date fechaRegistro;
-	
+	@Column(name = "idusuario")
+	private int idUsuario;
 	
 }
 

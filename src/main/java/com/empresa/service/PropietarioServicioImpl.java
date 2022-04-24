@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.empresa.entity.Propietario;
+import com.empresa.entity.Habitante;
 import com.empresa.repository.PropietarioRepository;
 
 @Service
@@ -14,17 +14,17 @@ public class PropietarioServicioImpl implements PropietarioService {
 	private PropietarioRepository repository;
 
 	@Override
-	public List<Propietario> listaTodos() {
+	public List<Habitante> listaTodos() {
 		return repository.findAll();
 	}
 
 	@Override
-	public List<Propietario> listaPorId(int id) {
+	public List<Habitante> listaPorId(int id) {
 		return repository.findByIdPropietario(id);
 	}
 
 	@Override
-	public Propietario insertaActualizaPropietario(Propietario obj) {
+	public Habitante insertaActualizaPropietario(Habitante obj) {
 		return repository.save(obj);
 	}
 

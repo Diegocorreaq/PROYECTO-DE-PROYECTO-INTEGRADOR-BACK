@@ -18,17 +18,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "propietario")
-public class Propietario {
+@Table(name = "usuario")
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idpropietario")
-	private int idPropietario;
-	
-	@Column(name = "coddepartamento")
-	private int codDepartamento;
-	private String dni;
+	@Column(name = "idusuario")
+	private int idUsuario;
+	private String password;
+	@Column(name = "idtipousuario")
+	private int idTipoUsuario;
+	private int dni;
 	private String nombre;
 	private String apellido;
 	private String correo;
@@ -36,7 +36,7 @@ public class Propietario {
 	private Date fechaNacimiento;
 	private Date fechaRegistro;
 	
-
+	
 }
 
 

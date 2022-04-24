@@ -33,6 +33,8 @@ public class Mascota {
 	private String raza;
 	private String sexo;
 	private Date fechaNacimiento;
+	@Column(name = "idusuario")
+	private int idUsuario;
 	private Date fechaRegistro;
 	
 	
