@@ -11,28 +11,16 @@ import com.empresa.repository.VisitanteRepository;
 @Service
 public class VisitanteServiceImpl implements VisitanteService {
 
-	@Autowired
-	private VisitanteRepository repository;
+	@Autowired VisitanteRepository repository;
 	
-	@Override
-	public List<Visitante> listaTodos() {
-		return repository.findAll();
-	}
-
-	@Override
-	public List<Visitante> listaPorId(int id) {
-		return repository.findByIdVisitante(id);
-	}
-
 	@Override
 	public Visitante insertaActualizaVisitante(Visitante obj) {
 		return repository.save(obj);
 	}
 
 	@Override
-	public void eliminaPorId(int id) {
-		repository.deleteById(id);
-
+	public List<Visitante> listaVisitante() {
+		return repository.findAll();
 	}
 
 }
