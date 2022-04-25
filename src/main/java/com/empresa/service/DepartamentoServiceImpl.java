@@ -10,29 +10,17 @@ import com.empresa.repository.DepartamentoRepository;
 
 @Service
 public class DepartamentoServiceImpl implements DepartamentoService {
+
+	@Autowired DepartamentoRepository	repository;
 	
-	@Autowired
-	private DepartamentoRepository repository;
-
-	@Override
-	public List<Departamento> listaTodos() {
-		return repository.findAll();
-	}
-
-	@Override
-	public List<Departamento> listaPorCod(int cod) {		
-		return repository.findByCodDepartamento(cod);
-	}
-
 	@Override
 	public Departamento insertaActualizaDepartamento(Departamento obj) {
 		return repository.save(obj);
 	}
 
 	@Override
-	public void eliminaPorId(int cod) {
-		repository.deleteById(cod);
-
+	public List<Departamento> listaDepartamento() {
+		return repository.findAll();
 	}
 
 }
