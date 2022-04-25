@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.empresa.entity.TipoHabitante;
 import com.empresa.entity.TipoUsuario;
+import com.empresa.service.TipoHabitanteService;
 import com.empresa.service.TipoUsuarioService;
 
 @RestController
@@ -19,11 +21,19 @@ import com.empresa.service.TipoUsuarioService;
 
 public class UtilController {
 	@Autowired TipoUsuarioService tipoUsuarioService;
+	@Autowired TipoHabitanteService tipoHabitanteService;
 	
 	@GetMapping("/tipousuario")
 	@ResponseBody
 	public ResponseEntity<List<TipoUsuario>> listaTipoUsuario(){
 		List<TipoUsuario> lista = tipoUsuarioService.listaTipoUsuario();
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("/tipohabitante")
+	@ResponseBody
+	public ResponseEntity<List<TipoHabitante>> listaTipoHabitante(){
+		List<TipoHabitante> lista = tipoHabitanteService.listaTipoHabitante();
 		return ResponseEntity.ok(lista);
 	}
 
