@@ -18,13 +18,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tipopropietario")
-public class TipoPropietario {
+@Table(name = "tipohabitante")
+public class TipoHabitante {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idtipopropietario")
-	private int idTipoPropietario;
+	@Column(name = "idtipohabitante")
+	private int idTipoHabitante;
 	private String descripcion;
 	private Date fechaRegistro;
 	
