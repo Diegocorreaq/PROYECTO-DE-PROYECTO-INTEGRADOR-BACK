@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +28,11 @@ public class Usuario {
 	@Column(name = "idusuario")
 	private int idUsuario;
 	private String password;
-	@Column(name = "idtipousuario")
-	private int idTipoUsuario;
+
+	@ManyToOne
+	@JoinColumn(name = "idtipousuario")
+	private TipoUsuario tipoUsuario;
+	
 	private int dni;
 	private String nombre;
 	private String apellido;
@@ -35,6 +40,7 @@ public class Usuario {
 	private String telefono;
 	private Date fechaNacimiento;
 	private Date fechaRegistro;
+	
 	
 	
 }
