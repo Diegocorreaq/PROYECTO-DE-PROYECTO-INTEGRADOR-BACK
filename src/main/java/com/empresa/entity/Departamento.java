@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +30,9 @@ public class Departamento {
 	private String descripcion;
 	private int numHabitaciones;
 	private Date fechaRegistro;
-	@Column(name = "idusuario")
-	private int idUsuario;
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private Usuario usuario;
 	
 }
 

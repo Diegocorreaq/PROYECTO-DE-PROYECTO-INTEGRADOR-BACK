@@ -2,15 +2,13 @@ package com.empresa.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,91 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 import com.empresa.entity.Departamento;
 import com.empresa.service.DepartamentoService;
 
+
+
 @RestController
 @RequestMapping("/rest/departamento")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DepartamentoController {
 
 	@Autowired
-	private DepartamentoService service;
-	
-	
+	private DepartamentoService departamentoService;
+
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Departamento>> listaTodos(){
-		return ResponseEntity.ok(service.listaTodos());
+	public ResponseEntity<List<Departamento>> listaDepartamento(){
+		List<Departamento> lista = departamentoService.listaDepartamento();
+		return ResponseEntity.ok(lista);
 	}
-	
-	@GetMapping("/{id}")
-	@ResponseBody
-	public ResponseEntity<List<Departamento>> listarPorCod(@PathVariable(name = "id") int cod){
-		return ResponseEntity.ok(service.listaPorCod(cod));
-	}
-	
+
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> insertarDepartamento(@RequestBody Departamento obj){
-		HashMap<String, Object> salida = new HashMap<String, Object>();
+	public  ResponseEntity<Map<String, Object>> insertaDepartamento(@RequestBody Departamento obj){
+		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<Departamento> lista = service.listaPorCod(obj.getCodDepartamento());
-			if (CollectionUtils.isEmpty(lista)) {
-				obj.setCodDepartamento(0);
-				Departamento objSalida = service.insertaActualizaDepartamento(obj);
-				if (objSalida == null) {
-					salida.put("mensaje", "Error al registrar");					
-				}else {
-					salida.put("mensaje", "Registro exitoso");
-				}		
+			Departamento objSalida = departamentoService.insertaActualizaDepartamento(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se registró, consulte con el administrador.");
 			}else {
-				salida.put("mensaje", "El Id ya existe: "+obj.getCodDepartamento());
+				salida.put("mensaje", "Se registró correctamente.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			salida.put("mensaje", "Error al registrar "+e.getMessage() );
-		}
-		return ResponseEntity.ok(salida);
-	}
-	@PutMapping
-	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> actualizarConcurso(@RequestBody Departamento obj){
-		HashMap<String, Object> salida = new HashMap<String, Object>();
-		try {
-			List<Departamento> lista = service.listaPorCod(obj.getCodDepartamento());
-			if (CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "El Id no existe: "+obj.getCodDepartamento());
-			}else {
-				Departamento objSalida = service.insertaActualizaDepartamento(obj);
-				if (objSalida == null) {
-					salida.put("mensaje", "Error al actualizar");					
-				}else {
-					salida.put("mensaje", "Actualización exitosa");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			salida.put("mensaje", "Error al actualizar "+e.getMessage() );
+			salida.put("mensaje", "No se registró, consulte con el administrador.");
 		}
 		return ResponseEntity.ok(salida);
 	}
 	
-	@DeleteMapping("/{id}")
-	@ResponseBody
-	public ResponseEntity<HashMap<String, Object>> eliminarDepartamento(@PathVariable(name = "id") int id){
-		HashMap<String, Object> salida = new HashMap<String, Object>();
-		try {
-			List<Departamento> lista = service.listaPorCod(id);
-			if (CollectionUtils.isEmpty(lista)) {				
-				salida.put("mensaje", "El Id no existe: "+id);
-			}else {				
-				service.eliminaPorId(id);
-				salida.put("mensaje", "Eliminación exitosa");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			salida.put("mensaje", "Error al eliminar "+e.getMessage() );
-		}
-		return ResponseEntity.ok(salida);
-	}
+	
 }
+
 
 
 
