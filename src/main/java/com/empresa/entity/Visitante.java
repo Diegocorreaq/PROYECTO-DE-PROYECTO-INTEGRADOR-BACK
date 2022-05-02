@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.empresa.entitySecurity.Usuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,7 +42,7 @@ public class Visitante {
 	private Date fechaNacimiento;
 	
 	@ManyToOne
-	@JoinColumn(name = "idusuario")
+	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	
 	private Date fechaRegistro;

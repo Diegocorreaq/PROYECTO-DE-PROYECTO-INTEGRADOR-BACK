@@ -1,5 +1,6 @@
 package com.empresa.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.empresa.entity.Departamento;
+import com.empresa.entitySecurity.Usuario;
 import com.empresa.service.DepartamentoService;
 
 
@@ -38,7 +40,11 @@ public class DepartamentoController {
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> insertaDepartamento(@RequestBody Departamento obj){
 		Map<String, Object> salida = new HashMap<>();
+		
 		try {
+			Usuario  u = new Usuario(1);
+			obj.setUsuario(u);
+			obj.setFechaRegistro(new Date());
 			Departamento objSalida = departamentoService.insertaActualizaDepartamento(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
