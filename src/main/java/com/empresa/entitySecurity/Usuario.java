@@ -57,10 +57,6 @@ public class Usuario {
 		return nombres.concat(" ").concat(apellidos);
 	}
 
-	public Usuario(int idUsuario) {
-		super();
-		this.idUsuario = idUsuario;
-	}
 	
 	
 }

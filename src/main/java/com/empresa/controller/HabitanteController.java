@@ -1,5 +1,6 @@
 package com.empresa.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.empresa.entity.Habitante;
+import com.empresa.entitySecurity.Usuario;
 import com.empresa.service.HabitanteService;
 
 
@@ -39,6 +41,11 @@ public class HabitanteController {
 	public  ResponseEntity<Map<String, Object>> insertaHabitante(@RequestBody Habitante obj){
 		Map<String, Object> salida = new HashMap<>();
 		try {
+			Usuario u = new Usuario();
+			u.setIdUsuario(1);
+			obj.setFechaRegistro(new Date());
+			obj.setUsuario(u);
+			
 			Habitante objSalida = habitanteService.insertaActualizaHabitante(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
