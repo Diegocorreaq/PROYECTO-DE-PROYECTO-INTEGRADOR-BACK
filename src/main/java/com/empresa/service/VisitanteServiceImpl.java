@@ -23,4 +23,10 @@ public class VisitanteServiceImpl implements VisitanteService {
 		return repository.findAll();
 	}
 
+	@Override
+	public List<Visitante> listaVistantePorDniNombreApellidoEstado(String dni, String nombre, String apellido,
+			int estado) {
+		return repository.listaVistantePorDniNombreApellidoEstado(dni, nombre, apellido, estado);
+	}
+
 }
