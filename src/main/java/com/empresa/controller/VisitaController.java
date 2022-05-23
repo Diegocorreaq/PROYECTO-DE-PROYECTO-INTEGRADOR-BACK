@@ -15,38 +15,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.empresa.entity.Visitante;
+import com.empresa.entity.Visita;
 import com.empresa.entitySecurity.Usuario;
-import com.empresa.service.VisitanteService;
+import com.empresa.service.VisitaService;
 
 
 
 @RestController
-@RequestMapping("/rest/visitante")
+@RequestMapping("/rest/visita")
 @CrossOrigin(origins = "http://localhost:4200")
-public class VisitanteController {
+public class VisitaController {
 
 	@Autowired
-	private VisitanteService visitanteService;
+	private VisitaService visitaService;
 
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Visitante>> listaHabitante(){
-		List<Visitante> lista = visitanteService.listaVisitante();
+	public ResponseEntity<List<Visita>> listaVisita(){
+		List<Visita> lista = visitaService.listaVisita();
 		return ResponseEntity.ok(lista);
 	}
 
 	@PostMapping
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> insertaHabitante(@RequestBody Visitante obj){
+	public  ResponseEntity<Map<String, Object>> insertaVisita(@RequestBody Visita obj){
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			Usuario u = new Usuario();
 			u.setIdUsuario(1);
 			obj.setFechaRegistro(new Date());
 			obj.setUsuario(u);
-			obj.setEstado(1);
-			Visitante objSalida = visitanteService.insertaActualizaVisitante(obj);
+			Visita objSalida = visitaService.insertaActualizaVisita(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
 			}else {
