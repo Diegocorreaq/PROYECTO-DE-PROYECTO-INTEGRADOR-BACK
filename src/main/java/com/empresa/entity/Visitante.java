@@ -34,7 +34,7 @@ public class Visitante {
 	@ManyToOne
 	@JoinColumn(name = "coddepartamento")
 	private Departamento departamento;
-	
+	private String dni;
 	private String nombre;
 	private String apellido;
 	private String telefono;

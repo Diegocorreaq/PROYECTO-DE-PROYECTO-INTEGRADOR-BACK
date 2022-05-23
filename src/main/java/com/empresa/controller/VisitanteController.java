@@ -7,11 +7,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,6 +61,53 @@ public class VisitanteController {
 		return ResponseEntity.ok(salida);
 	}
 	
+	@GetMapping("/listaVisitanteConParametros")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> listaVistantePorDniNombreApellidoEstado(
+			@RequestParam (name="dni", required = false, defaultValue = "")String dni,
+			@RequestParam (name="nombre", required = false, defaultValue = "")String nombre,
+			@RequestParam (name="apellido", required = false, defaultValue = "")String apellido,
+			@RequestParam (name="estado", required = true, defaultValue = "1")int estado){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Visitante> lista = visitanteService.listaVistantePorDniNombreApellidoEstado(dni,"%"+ nombre+"%","%"+ apellido+"%", estado);
+			if(CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No se registró, consulte con el administrador.");
+			}else {
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen "+lista.size()+" elementos para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se registró, consulte con el administrador.");
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	/*
+	@GetMapping("/listaVisitanteConParametros")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> listaVistantePorDniNombreApellidoEstado(
+			@RequestParam(name="dni", required = false, defaultValue = "0")String dni, 
+			@RequestParam(name="nombre", required = false, defaultValue = "")String nombre,
+			@RequestParam(name="apellido", required = false, defaultValue = "-1")String apellido,
+			@RequestParam(name="estado", required = true, defaultValue = "1")int estado){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<Visitante> lista = visitanteService.listaVistantePorDniNombreApellidoEstado(dni, "%"+nombre+"%", "%"+apellido+"%", estado);
+			if(CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No existen datos para mostrar");
+			}else {
+				salida.put("lista",lista);
+				salida.put("mensaje", "Existen "+lista.size()+" para mostrar");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se registró, consulte con el administrador.");
+		}				
+		return ResponseEntity.ok(salida);
+		
+	}*/
 	
 }
 
