@@ -83,31 +83,25 @@ public class VisitanteController {
 		}
 		return ResponseEntity.ok(salida);
 	}
-	
-	/*
-	@GetMapping("/listaVisitanteConParametros")
+	@GetMapping("/listaVisitantePorDni")
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> listaVistantePorDniNombreApellidoEstado(
-			@RequestParam(name="dni", required = false, defaultValue = "0")String dni, 
-			@RequestParam(name="nombre", required = false, defaultValue = "")String nombre,
-			@RequestParam(name="apellido", required = false, defaultValue = "-1")String apellido,
-			@RequestParam(name="estado", required = true, defaultValue = "1")int estado){
+	public  ResponseEntity<Map<String, Object>> listaVistantePorDni(
+			@RequestParam (name="dni", required = true, defaultValue = "")String dni){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<Visitante> lista = visitanteService.listaVistantePorDniNombreApellidoEstado(dni, "%"+nombre+"%", "%"+apellido+"%", estado);
+			List<Visitante> lista = visitanteService.listaVisitantePorDni(dni);
 			if(CollectionUtils.isEmpty(lista)) {
-				salida.put("mensaje", "No existen datos para mostrar");
+				salida.put("mensaje", "No se registró, consulte con el administrador.");
 			}else {
-				salida.put("lista",lista);
-				salida.put("mensaje", "Existen "+lista.size()+" para mostrar");
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen "+lista.size()+" elementos para mostrar");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", "No se registró, consulte con el administrador.");
-		}				
+		}
 		return ResponseEntity.ok(salida);
-		
-	}*/
+	}
 	
 }
 
