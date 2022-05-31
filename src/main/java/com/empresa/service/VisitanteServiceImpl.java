@@ -29,4 +29,9 @@ public class VisitanteServiceImpl implements VisitanteService {
 		return repository.listaVistantePorDniNombreApellidoEstado(dni, nombre, apellido, estado);
 	}
 
+	@Override
+	public List<Visitante> listaVisitantePorDni(String dni) {
+		return repository.listaVistantePorDni(dni);
+	}
+
 }
