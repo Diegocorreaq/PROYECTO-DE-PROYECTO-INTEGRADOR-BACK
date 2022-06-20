@@ -16,5 +16,9 @@ public interface BoletaRepository extends JpaRepository<Boleta, Integer>{
 	@Query("select b from Boleta b where (?1 is '' or b.departamento = ?1) and (?2 is '' or b.servicio like ?2) and (?3 is '' or b.anio = ?3) and (b.estado = ?4) ")
 	public List<Boleta> listaBoletaPorServicioDepartamentoAnioEstado(int servicio, int departamento, int anio, int estado);
 	
+
 	
+	
+	
+
 }
