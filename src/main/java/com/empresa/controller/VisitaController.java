@@ -45,6 +45,7 @@ public class VisitaController {
 			u.setIdUsuario(1);
 			obj.setFechaRegistro(new Date());
 			obj.setUsuario(u);
+			obj.setComentario("Sin comentarios");
 			Visita objSalida = visitaService.insertaActualizaVisita(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
