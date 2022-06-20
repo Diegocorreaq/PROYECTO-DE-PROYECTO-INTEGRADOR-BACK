@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,6 +97,23 @@ public class BoletaController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	@PutMapping("/actualizaBoleta")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaBoleta(@RequestBody Boleta obj) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Boleta objSalida =  boletaService.insertaActualizaBoleta(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", "No se actualizó, consulte con el administrador.");
+			} else {
+				salida.put("mensaje", "Se actualizó correctamente.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "No se actualizó, consulte con el administrador.");
+		}
+		return ResponseEntity.ok(salida);
+	}
 	@GetMapping("/listaBoletaConParametrosEstado")
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> listaBoletaPorServicioDepartamentoAnioEstado(
@@ -118,6 +136,7 @@ public class BoletaController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	
 	
 	public static List<Date>listaFechaPago(int anio){
 		int[]ultimoDiaMes = {31,28,31,30,31,30,31,31,30,31,30,31};
