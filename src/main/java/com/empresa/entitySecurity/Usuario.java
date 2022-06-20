@@ -50,8 +50,6 @@ public class Usuario {
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUbigeo")
-	private Ubigeo ubigeo;
 
 	public String getNombreCompleto() {
 		return nombres.concat(" ").concat(apellidos);
