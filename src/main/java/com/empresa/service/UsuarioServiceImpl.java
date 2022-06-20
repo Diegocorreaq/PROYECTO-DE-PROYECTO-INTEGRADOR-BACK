@@ -36,5 +36,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public List<Usuario> listarTodos() {
 		return repository.findAll();
 	}
+	@Override
+	public Usuario insertaActualizaUsuario(Usuario obj) {
+		return repository.save(obj);
+	}
+
 
 }

@@ -15,5 +15,8 @@ public interface UsuarioService {
 	public abstract Usuario buscaPorLogin(String login);
 	
 	public abstract List<Usuario> listarTodos();
+	
+	public Usuario insertaActualizaUsuario(Usuario obj) ;
+
 
 }
