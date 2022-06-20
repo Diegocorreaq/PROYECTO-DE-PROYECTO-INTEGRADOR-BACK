@@ -33,5 +33,7 @@ public class BoletaServiceImpl implements BoletaService{
 			int estado) {
 		return repository.listaBoletaPorServicioDepartamentoAnioEstado(servicio, departamento, anio, estado);
 	}
+
+	
 	
 }
