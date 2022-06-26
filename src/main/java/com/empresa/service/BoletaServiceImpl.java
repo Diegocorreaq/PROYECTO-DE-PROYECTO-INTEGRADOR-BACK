@@ -24,14 +24,13 @@ public class BoletaServiceImpl implements BoletaService{
 	}
 
 	@Override
-	public List<Boleta> listaBoletaPorServicioDepartamentoAnio(int servicio, int departamento, int anio) {
-		return repository.listaBoletaPorServicioDepartamentoAnio(servicio, departamento, anio);
+	public List<Boleta> listaBoletaPorServicioDepartamentoAnio(int departamento, int servicio, int anio) {
+		return repository.listaBoletaPorServicioDepartamentoAnio(departamento, servicio, anio);
 	}
 
 	@Override
-	public List<Boleta> listaBoletaPorServicioDepartamentoAnioEstado(int servicio, int departamento, int anio,
-			int estado) {
-		return repository.listaBoletaPorServicioDepartamentoAnioEstado(servicio, departamento, anio, estado);
+	public List<Boleta> listaBoletaPorServicioDepartamentoAnioEstado(int coddepartamento, int idservicio, int anio, int estado) {
+		return repository.listaBoletaPorServicioDepartamentoAnioEstado(coddepartamento, idservicio, anio, estado);
 	}
 
 	

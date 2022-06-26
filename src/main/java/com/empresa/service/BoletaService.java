@@ -8,7 +8,7 @@ public interface BoletaService {
 
 	public Boleta insertaActualizaBoleta(Boleta obj);
 	public List<Boleta> listaBoleta();
-	public List<Boleta> listaBoletaPorServicioDepartamentoAnio(int servicio, int departamento, int anio);
-	public List<Boleta> listaBoletaPorServicioDepartamentoAnioEstado(int servicio, int departamento, int anio, int estado);
+	public List<Boleta> listaBoletaPorServicioDepartamentoAnio(int departamento, int servicio, int anio);
+	public List<Boleta> listaBoletaPorServicioDepartamentoAnioEstado(int coddepartamento, int idservicio, int anio, int estado);
 	
 }

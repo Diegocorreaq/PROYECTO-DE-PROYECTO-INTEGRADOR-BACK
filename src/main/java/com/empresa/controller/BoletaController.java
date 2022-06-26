@@ -64,11 +64,11 @@ public class BoletaController {
 				 obj.setMes(i+1);
 				 boletaService.insertaActualizaBoleta(obj);
 			 }			
-			/*if (objSalida == null) {
+			if (obj == null) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
 			}else {
-				salida.put("mensaje", "Se registró correctamente.");
-			}*/
+				salida.put("mensaje", "Se generaron las boletas del año "+obj.getAnio());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", "No se registró, consulte con el administrador.");
@@ -117,13 +117,13 @@ public class BoletaController {
 	@GetMapping("/listaBoletaConParametrosEstado")
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> listaBoletaPorServicioDepartamentoAnioEstado(
-			@RequestParam (name="servicio", required = false, defaultValue = "")int servicio,
-			@RequestParam (name="departamento", required = false, defaultValue = "")int departamento,
-			@RequestParam (name="anio", required = false, defaultValue = "")int anio,
+			@RequestParam (name="departamento", required = false, defaultValue = "-1")int departamento,
+			@RequestParam (name="servicio", required = false, defaultValue = "-1")int servicio,
+			@RequestParam (name="anio", required = false, defaultValue = "-1")int anio,
 			@RequestParam (name="estado", required = true, defaultValue = "1")int estado){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			List<Boleta> lista = boletaService.listaBoletaPorServicioDepartamentoAnioEstado(servicio,departamento,anio,estado);
+			List<Boleta> lista = boletaService.listaBoletaPorServicioDepartamentoAnioEstado(departamento,servicio,anio,estado);
 			if(CollectionUtils.isEmpty(lista)) {
 				salida.put("mensaje", "No se registró, consulte con el administrador.");
 			}else {
