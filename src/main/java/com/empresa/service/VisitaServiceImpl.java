@@ -23,4 +23,10 @@ public class VisitaServiceImpl implements VisitaService {
 		return repository.findAll();
 	}
 
+	@Override
+	public List<Visita> listaVisitaConParametros(int coddepartamento, String dni, String nombre, String apellido,
+			int estado) {
+		return repository.listaVisitaConParametros(coddepartamento, dni, nombre, apellido, estado);
+	}
+
 }
