@@ -40,7 +40,7 @@ public class Visita {
 	
 	@ManyToOne
 	@JoinColumn(name = "idvisitante")
-	private Departamento idVisitante;
+	private Visitante visitante;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
