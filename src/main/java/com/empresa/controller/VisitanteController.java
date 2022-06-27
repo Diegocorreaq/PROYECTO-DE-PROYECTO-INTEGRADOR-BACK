@@ -102,6 +102,29 @@ public class VisitanteController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	@GetMapping("/BuscaVisitantePorDni")
+	@ResponseBody
+	public  ResponseEntity<Map<String, Object>> BuscaVistantePorDni(
+			@RequestParam (name="dni", required = true, defaultValue = "")String dni){
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			Visitante obj = new Visitante();
+			obj =  visitanteService.listaVisitantePorDni(dni).get(0);
+			if(dni=="" || dni==null){
+				salida.put("mensaje", "lista vacia");
+			}
+			if(obj==null) {
+				salida.put("mensaje", "No se encontro al visitante, registre uno nuevo o consulte con el administrador.");
+			}else {
+				salida.put("nombre", obj);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", "Error, consulte con el administrador.");
+		}
+		return ResponseEntity.ok(salida);
+	}
 	
 }
 
